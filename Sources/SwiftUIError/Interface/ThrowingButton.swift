@@ -28,7 +28,7 @@ public struct ThrowingButton<Label: View>: View {
     /// - Parameters:
     ///   - action: The action to perform when the user triggers the button.
     ///   - label: A view that describes the purpose of the button's `action`.
-    public init(action: @escaping () throws -> Void, label: Label) {
+    init(action: @escaping () throws -> Void, label: Label) {
         self.action = action
         self.label = label
     }
@@ -40,7 +40,8 @@ public struct ThrowingButton<Label: View>: View {
     ///   - action: The action to perform when the user triggers the button.
     ///   - label: A view that describes the purpose of the button's `action`.
     public init(action: @escaping () throws -> Void, @ViewBuilder label: () -> Label) {
-        self.init(action: action, label: label())
+        self.action = action
+        self.label = label()
     }
     
     @MainActor
