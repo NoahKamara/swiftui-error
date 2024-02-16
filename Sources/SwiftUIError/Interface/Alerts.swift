@@ -77,16 +77,12 @@ public extension View {
 }
 
 
-
+@available(iOS 15.0, *)
 #Preview {
-    if #available(iOS 15.0, *) {
-        ThrowingButton("Throw") {
-            throw URLError(.cancelled)
-        }
-        .alert("URL Error", for: URLError.self) { error in
-            Text("Ok")
-        }
-    } else {
-        Text("Not Supported")
+    ThrowingButton("Throw") {
+        throw URLError(.cancelled)
+    }
+    .alert("URL Error", for: URLError.self) { error in
+        Text("Ok")
     }
 }

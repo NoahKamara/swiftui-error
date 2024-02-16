@@ -65,10 +65,7 @@ struct ExampleView: View {
     }
 }
 
+@available(iOS 15.0, *)
 #Preview {
-    if #available(iOS 15.0, *) {
-        ExampleView()
-    } else {
-        Text("Not Supported")
-    }
+    ExampleView()
 }
