@@ -5,19 +5,28 @@ import PackageDescription
 
 let package = Package(
     name: "swiftui-error",
+    platforms: [
+        .iOS(.v13),
+        .macOS("10.15.4"),
+        .tvOS(.v13),
+        .watchOS(.v6),
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "swiftui-error",
-            targets: ["swiftui-error"]),
+            name: "SwiftUIError",
+            targets: ["SwiftUIError"]
+        ),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0")
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "swiftui-error"),
+            name: "SwiftUIError",
+            plugins: []
+        ),
         .testTarget(
-            name: "swiftui-errorTests",
-            dependencies: ["swiftui-error"]),
+            name: "SwiftUIErrorTests",
+            dependencies: ["SwiftUIError"]),
     ]
 )
