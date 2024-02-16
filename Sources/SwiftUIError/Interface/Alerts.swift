@@ -7,19 +7,23 @@
 
 import SwiftUI
 
-fileprivate struct ErrorAlertModifier<E: Error, A: View>: ViewModifier {
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+fileprivate struct ErrorAlertModifier<E: Error, Message: View, Actions: View>: ViewModifier {
     @State
     var error: E? = nil
     
-    let title: Text
-    let actions: (E) -> A
+    let titleKey: LocalizedStringKey
+    let actions: (E) -> Actions
+    let message: (E) -> Message
     
     init(
-        title: Text,
-        actions: @escaping (E) -> A
+        titleKey: LocalizedStringKey,
+        actions: @escaping (E) -> Actions,
+        message: @escaping (E) -> Message
     ) {
-        self.title = title
+        self.titleKey = titleKey
         self.actions = actions
+        self.message = message
     }
     
     func body(content: Content) -> some View {
@@ -27,42 +31,62 @@ fileprivate struct ErrorAlertModifier<E: Error, A: View>: ViewModifier {
             .onCatch(of: E.self, perform: { error in
                 self.error = error
             })
-        
+            .alert(
+                titleKey,
+                isPresented: $error.isPresent(),
+                presenting: error,
+                actions: actions,
+                message: message
+            )
     }
 }
 
-
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public extension View {
-    func alert<E: Error, A: View>(
-        title: Text,
+    func alert<E: Error, Actions: View, Message: View>(
+        _ titleKey: LocalizedStringKey,
         for type: E.Type = E.self,
         @ViewBuilder
-        actions: @escaping (E) -> A
+        actions: @escaping (E) -> Actions,
+        @ViewBuilder
+        message: @escaping (E) -> Message
     ) -> some View {
         self.modifier(
             ErrorAlertModifier(
-                title: title,
-                actions: actions
+                titleKey: titleKey,
+                actions: actions,
+                message: message
             )
         )
     }
     
-    func alert<E: Error, A: View, S: StringProtocol>(
-        _ title: S,
-        for type: E.Type = E.self,
-        @ViewBuilder
-        actions: @escaping (E) -> A
-    ) -> some View {
-        self.alert(title: Text(title), actions: actions)
-    }
-    
-    func alert<E: Error, A: View>(
+    func alert<E: Error, Message: View>(
         _ titleKey: LocalizedStringKey,
         for type: E.Type = E.self,
         @ViewBuilder
-        actions: @escaping (E) -> A
+        message: @escaping (E) -> Message
     ) -> some View {
-        self.alert(title: Text(titleKey), actions: actions)
+        self.modifier(
+            ErrorAlertModifier(
+                titleKey: titleKey,
+                actions: { _ in EmptyView() },
+                message: message
+            )
+        )
     }
 }
 
+
+
+#Preview {
+    if #available(iOS 15.0, *) {
+        ThrowingButton("Throw") {
+            throw URLError(.cancelled)
+        }
+        .alert("URL Error", for: URLError.self) { error in
+            Text("Ok")
+        }
+    } else {
+        Text("Not Supported")
+    }
+}
