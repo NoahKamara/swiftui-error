@@ -10,7 +10,7 @@ import Combine
 import OSLog
 
 /// A publisher that can be used to publish errors up the view hierarchy
-public struct ErrorHandling: Publisher {
+public class ErrorHandling: Publisher {
     public typealias Output = any Error
     public typealias Failure = Never
     typealias Subject = PassthroughSubject<any Error,Never>
@@ -40,10 +40,23 @@ public struct ErrorHandling: Publisher {
     }
 }
 
+
+public class RootErrorHandling: ErrorHandling {
+    init() {
+        super.init(subject: nil)
+    }
+    
+    /// Publishes an error upstream
+    /// - Parameter error: an error
+    public override func push<E: Error>(_ error: E) {
+        runtimeWarn("Error of \(String(describing: E.self)) was not caught: \(error)")
+    }
+}
+
 import SwiftUI
 
 private struct ErrorHandlingEnvironmentKey: EnvironmentKey {
-    static var defaultValue = ErrorHandling(subject: nil)
+    static var defaultValue: ErrorHandling = RootErrorHandling()
 }
 
 extension EnvironmentValues {
