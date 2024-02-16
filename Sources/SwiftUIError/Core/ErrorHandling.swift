@@ -31,7 +31,7 @@ public class ErrorHandling: Publisher {
     
     /// Publishes an error upstream
     /// - Parameter error: an error
-    public func push<E: Error>(_ error: E) {
+    public func push<E: Error>(_ error: E, file: String = #file, line: Int = #line) {
         guard let subject else {
             runtimeWarn("Cannot push error \(error)")
             return
@@ -48,8 +48,8 @@ public class RootErrorHandling: ErrorHandling {
     
     /// Publishes an error upstream
     /// - Parameter error: an error
-    public override func push<E: Error>(_ error: E) {
-        runtimeWarn("Error of \(String(describing: E.self)) was not caught: \(error)")
+    public override func push<E: Error>(_ error: E, file: String = #file, line: Int = #line) {
+        runtimeWarn("Uncaught Error thrown in \(file)@\(line): \(error)")
     }
 }
 

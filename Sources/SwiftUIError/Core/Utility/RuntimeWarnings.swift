@@ -18,9 +18,9 @@ extension Notification.Name {
 @inline(__always)
 func runtimeWarn(
     _ message: @autoclosure () -> String,
-    category: String? = "ComposableArchitecture"
+    category: String? = "SwiftUIError"
 ) {
-#if DEBUG || targetEnvironment(simulator)
+#if (DEBUG || targetEnvironment(simulator))
     let message = message()
     NotificationCenter.default.post(
         name: ._runtimeWarning,
