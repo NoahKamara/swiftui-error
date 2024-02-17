@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftUIError
 
+
 struct MakeProblemButton<E: Error>: View {
     let error: E
     @Environment(\.errorHandling)
