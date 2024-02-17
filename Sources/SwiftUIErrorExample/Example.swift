@@ -57,14 +57,11 @@ struct ExampleView: View {
             ThrowingButton("BarError.fatal", action: { throw BarError.makeFatal() })
             
             // This is caught by the outter "Foo Error" onCatch
-            ThrowingButton("FooError", action: { throw FooError() })
+            ThrowingButton("FooError", action: { throw BarError.makeFatal() })
         }
         .onCatch(of: FooError.self, perform: { error in
             print("caught FooError in closure: ", error)
         })
-        .onCatch { error in
-            print("Any Error", error)
-        }
     }
 }
 

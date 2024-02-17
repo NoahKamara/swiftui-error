@@ -66,10 +66,4 @@ public extension View {
     ) -> some View {
         self.modifier(ErrorReceivingModifier(action: action))
     }
-    
-    func onCatch(
-        perform action: @escaping (any Error) -> Void
-    ) -> some View {
-        self.modifier(ErrorReceivingModifier<any Error>(action: action))
-    }
 }
