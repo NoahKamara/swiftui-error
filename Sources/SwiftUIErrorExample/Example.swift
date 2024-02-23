@@ -26,7 +26,7 @@ enum BarError: Error {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct ExampleView: View {
     var body: some View {
         VStack {
@@ -68,7 +68,7 @@ struct ExampleView: View {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 #Preview {
     ExampleView()
 }
