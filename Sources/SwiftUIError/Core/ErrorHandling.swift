@@ -31,6 +31,7 @@ public class ErrorHandling: Publisher {
     
     /// Publishes an error upstream
     /// - Parameter error: an error
+    @MainActor
     public func push<E: Error>(_ error: E, file: String = #file, line: Int = #line) {
         guard let subject else {
             runtimeWarn("Cannot push error \(error)")

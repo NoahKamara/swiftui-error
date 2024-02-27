@@ -37,7 +37,7 @@ extension View {
                 do {
                     try await action()
                 } catch {
-                    errors.push(error)
+                    await errors.push(error)
                 }
             }
         }
@@ -79,7 +79,7 @@ extension View {
                 do {
                     try await action()
                 } catch {
-                    errors.push(error)
+                    await errors.push(error)
                 }
             }
         }
