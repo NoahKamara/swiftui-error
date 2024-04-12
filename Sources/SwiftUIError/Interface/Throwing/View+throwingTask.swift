@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Noah Kamara on 17.02.24.
-//
-
 import SwiftUI
 
 

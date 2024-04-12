@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Noah Kamara on 16.02.24.
-//
-
 import SwiftUI
 
 /// A control that initiates a throwing action.
@@ -17,24 +10,31 @@ import SwiftUI
 /// > This is an implementation of SwiftUI's `Button` that takes a throwing action
 ///
 public struct ThrowingButton<Label: View>: View {
-    @Environment(\.errorHandling)
-    private var errors
-    
     private let action: () throws -> Void
     private let label: Label
     
     /// Creates a throwing button that displays a custom label.
     ///
+    /// ```swift
+    /// ThrowingButton(action: { throw URLError(.cancelled) }, label: Text("Throw Error"))
+    /// ```
+    ///
     /// - Parameters:
     ///   - action: The action to perform when the user triggers the button.
     ///   - label: A view that describes the purpose of the button's `action`.
-    init(action: @escaping () throws -> Void, label: Label) {
+    public init(action: @escaping () throws -> Void, label: Label) {
         self.action = action
         self.label = label
     }
     
     
     /// Creates a throwing button that displays a custom label.
+    ///
+    /// ```swift
+    /// ThrowingButton(action: { throw URLError(.cancelled) }) {
+    ///     Text("Throw Error")
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - action: The action to perform when the user triggers the button.
@@ -46,20 +46,28 @@ public struct ThrowingButton<Label: View>: View {
     
     @MainActor
     public var body: some View {
-        Button<Label>(action: {
-            do {
-                try action()
-            } catch {
-                errors.push(error)
-            }
-        }, label: {
-            label
-        })
+        WithErrorHandling { errors in
+            Button<Label>(action: {
+                do {
+                    try action()
+                } catch {
+                    errors.push(error)
+                }
+            }, label: {
+                label
+            })
+        }
     }
 }
 
 extension ThrowingButton where Label == Text {
     /// Creates a throwing button that generates its label from a localized string key.
+    ///
+    /// ```swift
+    /// ThrowingButton("Throw Error") {
+    ///     throw URLError(.cancelled)
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - titleKey: The key for the button's localized title, that describes
@@ -70,6 +78,12 @@ extension ThrowingButton where Label == Text {
     }
     
     /// Creates a throwing button that generates its label from a string.
+    ///
+    /// ```swift
+    /// ThrowingButton("Throw Error") {
+    ///     throw URLError(.cancelled)
+    /// }
+    /// ```
     ///
     /// - Parameters:
     ///   - title: A string that describes the purpose of the button's `action`.

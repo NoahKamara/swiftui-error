@@ -1,10 +1,3 @@
-//
-//  SwiftUIView 2.swift
-//  
-//
-//  Created by Noah Kamara on 16.02.24.
-//
-
 import SwiftUI
 import SwiftUIError
 

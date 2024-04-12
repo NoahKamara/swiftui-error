@@ -44,8 +44,8 @@ public extension View {
     /// For example, you can log when a `FooError` is thrown like so:
     ///
     ///     var body: some View {
-    ///         Button(action: {}) {
-    ///
+    ///         ThrowingButton("Throw FooError") {
+    ///             throw FooError()
     ///         }
     ///         .onCatch(of: FooError.self) { error in
     ///             print("Caught 'FooError':", error)
