@@ -38,7 +38,7 @@ public extension View {
     ///
     ///
     /// Add this view modifer to a view to set the closure the Environment calls when presenting
-    /// a particular kind of error. Use ``SwiftUIError/EnvironmentError/push`` to
+    /// a particular kind of error. Use ``SwiftUIError/ErrorHandling/push(_:file:line:)`` to
     /// throw an error.
     ///
     /// For example, you can log when a `FooError` is thrown like so:

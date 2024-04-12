@@ -50,8 +50,8 @@ public extension View {
     ///
     /// In vertically compact environments, such as iPhone in landscape
     /// orientation, a sheet presentation automatically adapts to appear as a
-    /// full-screen cover. Use the ``View/presentationCompactAdaptation(_:)`` or
-    /// ``View/presentationCompactAdaptation(horizontal:vertical:)`` modifier to
+    /// full-screen cover. Use the ``SwiftUI/View/presentationCompactAdaptation(_:)`` or
+    /// ``SwiftUI/View/presentationCompactAdaptation(horizontal:vertical:)`` modifier to
     /// override this behavior.
     ///
     /// - Parameters:

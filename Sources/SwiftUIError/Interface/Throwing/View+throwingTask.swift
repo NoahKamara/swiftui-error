@@ -12,8 +12,7 @@ extension View {
     ///
     /// - Parameters:
     ///   - priority: The task priority to use when creating the asynchronous
-    ///     task. The default priority is
-    ///     <doc://com.apple.documentation/documentation/Swift/TaskPriority/userInitiated>.
+    ///     task. The default priority is `.userInitiated`
     ///   - action: A closure that SwiftUI calls as an asynchronous task
     ///     before the view appears. SwiftUI will automatically cancel the task
     ///     at some point after the view disappears before the action completes.
@@ -40,21 +39,20 @@ extension View {
     /// Adds a task to perform before this view appears or when a specified
     /// value changes.
     ///
-    /// This method behaves like ``View/throwingTask(priority:_:)``, except that it also
+    /// This method behaves like <doc:/documentation/SwiftUIError/SwiftUI/View/throwingTask(priority:_:)>, except that it also
     /// cancels and recreates the task when a specified value changes. To detect
     /// a change, the modifier tests whether a new value for the `id` parameter
     /// equals the previous value. For this to work,
     /// the value's type must conform to the
-    /// <doc://com.apple.documentation/documentation/Swift/Equatable> protocol.
+    /// Equatable protocol.
     ///
     ///
     /// - Parameters:
     ///   - id: The value to observe for changes. The value must conform
-    ///     to the <doc://com.apple.documentation/documentation/Swift/Equatable>
+    ///     to the Equatable
     ///     protocol.
     ///   - priority: The task priority to use when creating the asynchronous
-    ///     task. The default priority is
-    ///     <doc://com.apple.documentation/documentation/Swift/TaskPriority/userInitiated>.
+    ///     task. The default priority is `userInitiated`
     ///   - action: A closure that SwiftUI calls as an asynchronous task
     ///     before the view appears. SwiftUI can automatically cancel the task
     ///     after the view disappears before the action completes. If the

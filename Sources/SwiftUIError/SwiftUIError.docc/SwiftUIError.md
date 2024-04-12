@@ -1,28 +1,28 @@
 # ``SwiftUIError``
 
-<!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
+SwiftUIError is a Library that aims to improve handling errors in SwiftUI Interfaces.
+Image `NavigationLink` and `.navigationDestination(for:,)` but for error handling
+
+
 
 ## Overview
 
-<!--@START_MENU_TOKEN@-->Text<!--@END_MENU_TOKEN@-->
+
 
 ## Topics
 
 ### Throwing Errors
 - ``SwiftUIError/ThrowingButton``
+- ``SwiftUIError/SwiftUI/View/throwingTask(priority:_:)``
+- ``SwiftUIError/SwiftUI/View/throwingTask(id:priority:_:)``
 
 ### Catching Errors
 - ``SwiftUIError/SwiftUI/View/onCatch(of:perform:)``
+- ``SwiftUIError/SwiftUI/View/onCatch(perform:)``
 
-### Presenting Alerts
-- ``SwiftUIError/SwiftUI/View/alert(_:for:actions:)-9crql``
-- ``SwiftUIError/SwiftUI/View/alert(_:for:actions:)-9jl7w``
-- ``SwiftUIError/SwiftUI/View/alert(title:for:actions:)``
-
-### Presenting Alerts
-- ``SwiftUIError/SwiftUI/View/alert(_:for:actions:)-9crql``
-- ``SwiftUIError/SwiftUI/View/alert(_:for:actions:)-9jl7w``
-- ``SwiftUIError/SwiftUI/View/alert(title:for:actions:)``
+### Handling Errors in Views
+- ``SwiftUIError/SwiftUI/View/alert(_:for:message:)``
+- ``SwiftUIError/SwiftUI/View/alert(_:for:actions:message:)``
+- ``SwiftUIError/SwiftUI/View/sheet(for:onDismiss:content:)``
 
 
-<!--- ``SwiftUIError/SwiftUI/View/onCatch(of:perform:)``-->
